@@ -26,9 +26,70 @@ becomes C. To change a message back, each letter is replaced by the one three be
 ### STEP-4: Else subtract the key from the plain text.
 ### STEP-5: Display the cipher text obtained above.
 
+ ## PROGRAM :-
+~~~
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-PROGRAM :-
+#define MAX_LENGTH 100
+
+void main() {
+    char plain[MAX_LENGTH], cipher[MAX_LENGTH];
+    int key, i, length;
+
+    // Take input from user
+    printf("\nEnter the plain text: ");
+    scanf("%s", plain);
+    printf("\nEnter the key value: ");
+    scanf("%d", &key);
+
+    length = strlen(plain);
+
+    // Print original plain text
+    printf("\n\tPLAIN TEXT: %s", plain);
+    printf("\n\n\tENCRYPTED TEXT: ");
+
+    // Encrypt the text using Caesar Cipher
+    for (i = 0; i < length; i++) {
+        cipher[i] = plain[i] + key;
+
+        // Ensure wrapping within 'A'-'Z' or 'a'-'z'
+        if (isupper(plain[i]) && cipher[i] > 'Z') {
+            cipher[i] = cipher[i] - 26;
+        }
+        if (islower(plain[i]) && cipher[i] > 'z') {
+            cipher[i] = cipher[i] - 26;
+        }
+
+        printf("%c", cipher[i]);
+    }
+
+    // Decrypt the text using the same key
+    printf("\n\n\tAFTER DECRYPTION: ");
+    for (i = 0; i < length; i++) {
+        plain[i] = cipher[i] - key;
+
+        // Ensure wrapping within 'A'-'Z' or 'a'-'z'
+        if (isupper(cipher[i]) && plain[i] < 'A') {
+            plain[i] = plain[i] + 26;
+        }
+        if (islower(cipher[i]) && plain[i] < 'a') {
+            plain[i] = plain[i] + 26;
+        }
+
+        printf("%c", plain[i]);
+    }
+
+    printf("\n");
+}
+~~~
 
 
 
-OUTPUT :-
+## OUTPUT :-
+
+![image](https://github.com/user-attachments/assets/6c8058fa-918c-4b28-8eda-85abecc07004)
+
+## RESULT:
+   Thus the implementation of caesar cipher was executed successfully.
